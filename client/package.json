@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "@inquirer/prompts": "^7.1.0",
+    "inquirer": "^12.1.0"
+  },
+  "name": "client",
+  "version": "1.0.0",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "app": "cd dist && npx tsc && node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/inquirer": "^9.0.7"
+  }
+}
