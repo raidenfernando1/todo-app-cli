@@ -1,7 +1,32 @@
 import inquirer from "inquirer";
 import { checkSpecialChars } from "../helper/regex.js";
-const validateLogin = (username, password) => {
-    // do the fucking request
+import fetch from "node-fetch";
+const validateLogin = async (username, password) => {
+    try {
+        const response = await fetch("http://localhost:8080/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password,
+            }),
+        });
+        // Parse response as JSON and cast it to LoginResponse
+        const data = (await response.json());
+        // Check if the response has an error message
+        if (data.error) {
+            console.log("Login failed: " + data.error); // Log error message from server
+        }
+        else {
+            console.log("response: " + JSON.stringify(data)); // Log the successful response
+            console.log("Login successful!");
+        }
+    }
+    catch (e) {
+        console.error("Request failed:", e);
+    }
 };
 export const login = () => {
     const userLogin = inquirer
@@ -25,7 +50,7 @@ export const login = () => {
             name: "password",
             message: "Password: ",
             mask: "-",
-            validate: function (answers) {
+            validate(answers) {
                 if (answers == "" && answers.includes(" ")) {
                     return "Invalid no whitespace allowed";
                 }
@@ -37,7 +62,8 @@ export const login = () => {
         },
     ])
         .then((input) => {
-        console.log(input);
+        const { username, password } = input;
+        validateLogin(username, password);
     });
 };
 export default login;

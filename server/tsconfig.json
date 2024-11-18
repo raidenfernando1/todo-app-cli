@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES2023", // Set the target ECMAScript version
+    "module": "NodeNext", // Module system for Node.js
+    "moduleResolution": "nodenext",
+    "types": ["node", "express", "bcrypt", "jsonwebtoken"],
+    "strict": true, // Enable strict mode for type checking
+    "esModuleInterop": true, // Allow default imports from CommonJS modules
+    "skipLibCheck": true, // Skip checking libraries
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist", // Output directory for compiled JS files
+    "rootDir": "./src" // Input directory for TypeScript files
+  },
+  "include": [
+    "src/**/*.ts" // Include all TypeScript files in the 'src' folder
+  ],
+  "exclude": [
+    "node_modules" // Exclude the 'node_modules' folder
+  ]
+}
