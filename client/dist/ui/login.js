@@ -1,7 +1,11 @@
 import inquirer from "inquirer";
 import { checkSpecialChars } from "../helper/regex.js";
+const validateLogin = (username, password) => {
+    // do the fucking request
+};
 export const login = () => {
-    const userLogin = inquirer.prompt([
+    const userLogin = inquirer
+        .prompt([
         {
             type: "input",
             name: "username",
@@ -31,7 +35,9 @@ export const login = () => {
                 return true;
             },
         },
-    ]);
-    return console.log(userLogin);
+    ])
+        .then((input) => {
+        console.log(input);
+    });
 };
 export default login;
