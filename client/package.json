@@ -11,13 +11,15 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "app": "cd dist && npx tsc && node app.js"
+    "app": "mkdir dist && cd dist && npx tsc && node app.js",
+    "clean": "rimraf dist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@types/inquirer": "^9.0.7"
+    "@types/inquirer": "^9.0.7",
+    "rimraf": "^6.0.1"
   }
 }

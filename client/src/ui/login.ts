@@ -1,9 +1,7 @@
 import inquirer from "inquirer";
 import { checkSpecialChars } from "../helper/regex.js";
-import { mainLayout } from "../helper/login-layout.js";
 import fetch from "node-fetch";
 
-// Define the type for the response data
 interface LoginResponse {
   message?: string;
   error?: string;
@@ -23,23 +21,20 @@ const validateLogin = async (username: string, password: string) => {
       }),
     });
 
-    // Parse response as JSON and cast it to LoginResponse
     const data = (await response.json()) as LoginResponse;
 
-    // Check if the response has an error message
     if (data.error) {
-      console.log("Login failed: " + data.error); // Log error message from server
+      console.log("ERROR: " + data.error);
     } else {
-      console.log("response: " + JSON.stringify(data)); // Log the successful response
-      console.log("Login successful!");
+      console.log("RESPONSE: " + JSON.stringify(data));
     }
   } catch (e) {
-    console.error("Request failed:", e);
+    console.error("REQUEST FAILED ERROR: ", e);
   }
 };
 
 export const login = () => {
-  const userLogin = inquirer
+  inquirer
     .prompt([
       {
         type: "input",
