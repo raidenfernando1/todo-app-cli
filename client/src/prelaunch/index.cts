@@ -1,14 +1,16 @@
 import fs from "fs";
 import path from "path";
 
-export const prerequisite = () => {
+export const prerequisite = async (): Promise<string> => {
   const currentDir = path.resolve();
   const dataDir = path.join(currentDir, "data");
 
-  // Check if the directory exists
-  if (fs.existsSync(dataDir)) {
-    console.log("Directory exists:", dataDir);
-  } else {
-    console.error("Directory does not exist:", dataDir);
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
   }
+  return dataDir;
 };
+
+(async () => {
+  global.dataFolder = await prerequisite();
+})();

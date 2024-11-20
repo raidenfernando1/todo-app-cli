@@ -6,15 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.prerequisite = void 0;
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
-const prerequisite = () => {
+const prerequisite = async () => {
     const currentDir = path_1.default.resolve();
     const dataDir = path_1.default.join(currentDir, "data");
-    // Check if the directory exists
-    if (fs_1.default.existsSync(dataDir)) {
-        console.log("Directory exists:", dataDir);
+    if (!fs_1.default.existsSync(dataDir)) {
+        fs_1.default.mkdirSync(dataDir, { recursive: true });
     }
-    else {
-        console.error("Directory does not exist:", dataDir);
-    }
+    return dataDir;
 };
 exports.prerequisite = prerequisite;
+(async () => {
+    global.dataFolder = await (0, exports.prerequisite)();
+})();

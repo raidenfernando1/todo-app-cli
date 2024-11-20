@@ -1,6 +1,9 @@
 import inquirer from "inquirer";
+import fs from "fs";
+import { console } from "inspector";
 export const signup = () => {
-    inquirer.prompt([
+    inquirer
+        .prompt([
         {
             type: "input",
             name: "username",
@@ -18,6 +21,17 @@ export const signup = () => {
             message: "Confirm Password: ",
             mask: "-",
         },
-    ]);
+    ])
+        .then((answers) => {
+        const data = JSON.stringify(answers, null, 2);
+        fs.writeFile(dataFolder, data, (err) => {
+            if (err) {
+                console.error("Error writing file: " + err);
+            }
+            else {
+                console.log("User created sucessfully open the app again");
+            }
+        });
+    });
 };
 export default signup;
