@@ -1,12 +1,12 @@
 import inquirer from "inquirer";
 import login from "./ui/login.js";
-import signup from "./ui/signup.js";
 import { mainLayout } from "./helper/login-layout.js";
 import { prerequisite } from "./prelaunch/index.cjs";
-
-prerequisite();
+import { signup } from "./ui/signup.js";
 async function app() {
-  console.log(`    _______
+  prerequisite();
+  console.log(`    
+    _______
    /      /,
   /      //
  /______//

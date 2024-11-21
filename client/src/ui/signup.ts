@@ -1,11 +1,9 @@
 import inquirer from "inquirer";
-import fs from "fs";
-import { console } from "inspector";
-import { prerequisite } from "../prelaunch/index.cjs";
 
-export const signup = () => {
-  inquirer
-    .prompt([
+export const signup = async () => {
+  let isNotValid = true;
+  while (isNotValid) {
+    const answers = await inquirer.prompt([
       {
         type: "input",
         name: "username",
@@ -23,17 +21,17 @@ export const signup = () => {
         message: "Confirm Password: ",
         mask: "-",
       },
-    ])
-    .then((answers) => {
-      const data = JSON.stringify(answers, null, 2);
-      fs.writeFile(dataFolder, data, (err) => {
-        if (err) {
-          console.error("Error writing file: " + err);
-        } else {
-          console.log("User created sucessfully open the app again");
-        }
-      });
-    });
+    ]);
+
+    const { username, createPassword, confirmPassword } = answers;
+
+    if (createPassword !== confirmPassword) {
+      console.log("Passwords do not match. Please try again.");
+    } else {
+      console.log(`Signup successful for ${username}`);
+      break;
+    }
+  }
 };
 
 export default signup;
